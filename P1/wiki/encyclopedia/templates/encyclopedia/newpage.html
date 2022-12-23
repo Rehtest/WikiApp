@@ -1,0 +1,25 @@
+{% extends "encyclopedia/layout.html" %}
+
+{% block title %}
+
+New Page
+
+{% endblock %}
+
+{% block body %}
+
+<h1>Enter your Content Below in <a href="https://en.wikipedia.org/wiki/Markdown">Markdown</a></h1>
+<form action="{% url 'newpage' %}" method="post">
+    {% csrf_token %}
+    <!--The below input is hidden and used to identify that this is a new page being added. 
+    This is so that the new page function doesn't overwrite an existing page (The edit page function is meant for that). See new_page in views.py-->
+    <input type="hidden" name="page_flag" value="newpage">
+    <input type="text" name="page_title" placeholder="Enter page title here.">
+    <br>
+    <br>
+    <textarea name="page_details" rows="5" cols="5"></textarea>
+    <br>
+    <input type="submit" value="Submit">
+</form>
+
+{% endblock %}

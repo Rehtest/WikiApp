@@ -1,0 +1,23 @@
+{% extends "encyclopedia/layout.html" %}
+
+{% block title %}
+
+Edit: {{ title }} 
+
+{% endblock %}
+
+{% block body %}
+
+<form action="{% url 'newpage' %}" method="post">
+    {% csrf_token %}
+    <!--The below input is hidden and used to identify that this is the edit page branch within the new page function. 
+    This is so that the new page function can overwrite an existing page (The new page function otherwise throws an error for existing pages). See new_page in views.py-->
+    <input type="hidden" name="page_flag" value="edit">
+    <h1>{{ title }}</h1>
+    <input type="hidden" name="page_title" value="{{ title }}">
+    <textarea name="page_details">{{ page }}</textarea>
+    <br>
+    <input type="submit" value="Submit">
+</form>
+
+{% endblock %}
